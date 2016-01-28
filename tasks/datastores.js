@@ -61,7 +61,7 @@ function report(message) {
 }
 
 function getDataStore(door, acc) {
-	phantom.create(function (ph) {
+	phantom.create('--web-security=false', function (ph) {
 		ph.createPage(function(page) {
 			page.set('onConsoleMessage', function () {
 				page.evaluate(
@@ -88,7 +88,10 @@ function getDataStore(door, acc) {
 				}
 			});
 		});
-	});
+	},{
+  dnodeOpts: {
+    weak: false
+  }});
 }
 
 
@@ -103,7 +106,7 @@ function processDoors() {
 }
 
 function getDoors() {
-	phantom.create(function (ph) {
+	phantom.create('--web-security=false', function (ph) {
 		ph.createPage(function(allpage) {
 			allpage.set('onConsoleMessage', function () {
 				allpage.evaluate(
@@ -138,7 +141,10 @@ function getDoors() {
 				}
 			});
 		});
-	});
+	},{
+  dnodeOpts: {
+    weak: false
+  }});
 }
 
 console.log('Wayfinding dataStore generator');
