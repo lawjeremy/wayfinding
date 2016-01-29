@@ -71,11 +71,13 @@ function getDataStore(door, acc) {
 					},
 					function(result) {
 						//write resulting JSON to appropriate file
-						fs.writeFile(destination + door + ((acc) ? '.acc' : '') + '.JSON', result, function(err) {
+						var filePath = destination + door.trim() + ((acc) ? '.acc' : '') + '.JSON';
+						fs.writeFile(filePath, result, function(err) {
 							if (err) {
-								next(report, 'ERROR creating ' + destination + door + ((acc) ? '.acc' : '') + '.JSON');
+								console.log(err);
+								next(report, 'ERROR creating ' + filePath);
 							} else {
-								next(report, 'successfully wrote ' + destination + door + ((acc) ? '.acc' : '') + '.JSON');
+								next(report, 'successfully wrote ' + filePath);
 							}
 						});
 						ph.exit();
